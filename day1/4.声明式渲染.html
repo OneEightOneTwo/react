@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="demo"></div>
+        <script src="../js/react.js"></script>
+        <!-- 提供全局的 React变量 -->
+        <script src="../js/react-dom.js"></script>
+        <!-- 提供全局的 ReactDOM变量 webpack  -->
+        <script src="../js/babel.js"></script>
+        <script type="text/babel">
+            let data = {
+                // 数字
+                num:18,
+                style:{
+                    color:'red'
+                },
+                bool:true,
+                arr:[{
+                    name:"yao",
+                    age:18
+                },{
+                    name:"lemon",
+                    age:16
+                },{
+                    name:"jing",
+                    age:16
+                }],
+                arr2:['a','b','c'],
+                arr3:[
+                    <li key='0'>a</li>,
+                    <li key='1'>b</li>,
+                    <li key='2'>c</li>
+                ]
+            }
+            // console.log(React);
+            // console.log(ReactDOM);
+            ReactDOM.render(
+            // template
+            <div>
+                <p style={data.style}>1.数字</p>
+                <p>{data.num}</p>
+                <p style={data.style}>2.布尔值</p>
+                <p>{!data.bool?'真的':'假的'}</p>
+                {/*
+                    相当于v-if
+                */}
+                <p>{((bool)=>{
+                    if(bool){
+                        return '真的'
+                    }else{
+                        return '假的'
+                    }
+                })(data.bool)}</p>
+                {/*
+                    相当于v-show
+                */}
+                <p style={{
+                    display:!data.bool?'block':'none'
+                }}>display属性值的切换</p>
+                <p style={((bool)=>{
+                    if(bool){
+                        return {
+                            display:'block'
+                        }
+                    }else{
+                        return {
+                            display:'none'
+                        }
+                    }
+                })(data.bool)}>display属性值的切换</p>
+                <p style={data.style}>3.数组</p>
+                {/*
+                    相当于v-for 如果直接渲染数组的话，它会按顺序遍历渲染出来
+                */}
+                {data.arr2}
+                <ul>
+                    {data.arr3}
+                </ul>
+                <ul>
+                    {
+                        (()=>{
+                            let arr = data.arr.map((item,index)=>{
+                                console.log(item)
+                                return <li key={index}>{item.name} {item.age}</li>
+                            })
+                            console.log(arr)
+                            return arr
+                        })()
+                    }
+                </ul>
+            </div>,
+            // el
+            document.querySelector("#demo"),
+            // 回调可选项，你的页面被渲染之后触发的回调函数
+            ()=>{
+                console.log("render success")
+            })
+        </script>
+    </body>
+</html>

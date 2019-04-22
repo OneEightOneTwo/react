@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="demo"></div>
+        <script src="../js/react.js"></script>
+        <!-- 提供全局的 React变量 -->
+        <script src="../js/react-dom.js"></script>
+        <!-- 提供全局的 ReactDOM变量 webpack  -->
+        <script src="../js/babel.js"></script>
+        <script type="text/babel">
+            // Model
+            //跟vue的区别是，m->v之间的关联是通过指令v-text,v-html,声明式渲染两个大括号{{}}
+            //但是react只有一层大括号{},并且react没有指令
+            // vue是双向数据绑定  M->V V->M 开发效率高，性能较低 适合小公司小型项目
+            // react是单向数据绑定，单向数据流 M->V V!->M 开发效率低，性能高，适合大公司大型项目
+            let data = {
+                name: 'yao'
+            }
+            ReactDOM.render(
+            // template
+            <div>
+                {data.name}
+            </div>,
+            // el
+            document.querySelector("#demo"),
+            // 回调可选项，你的页面被渲染之后触发的回调函数
+            ()=>{
+                console.log("render success")
+            })
+        </script>
+    </body>
+</html>

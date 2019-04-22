@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 每层儿子都找一遍 -->
+    <div>
+        <p key="1"></p>
+        <div>
+            <p></p>
+        </div>
+        <div>
+            <div>
+                <p name="abc">
+                    <span id="cdf"></span>
+                </p>
+            </div>
+            <div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p name="abc"></p>
+            </div>
+            <div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- diff -->
+    <!-- diff 同一代才对比寻找 -->
+    <script>
+        // 其实给每个标签一个名字是最快的
+        // 满屏的id和选择器
+        document.querySelectorAll('p').querySelector("[name='abc']")
+        document.querySelector("[name='abc']")
+        // 一大堆id 节点驱动
+        // document.querySelectorAll('p')
+        // dif是每层对比的，所以时间复杂度为N，有一千个子节点，只要对比1000次
+
+        // for(let i=0;i<=99;i++){
+        //     for(let i=0;i<=99;i++){
+                
+        //     }
+        // }
+        // 指数爆炸 算法是非常吃时间的 算的次数越多
+        // n^2
+        var arr = ['a','b','c','b','d'] //10000项
+        function unique(arr) {
+            // 开空间
+            // 开了新的对象
+            var obj = {}
+            // 开了新的数组
+            var result = []
+            for(var i in arr) {
+                if(!obj[arr[i]]) {
+                    obj[arr[i]] = true;
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+        }
+        // n
+
+        obj = {
+            a:1,
+            b:1,
+            c:1,
+            d:1
+        }
+
+        // 冒泡算法
+        let arr2 = unique(arr);
+        console.log(arr);
+        console.log(arr2);
+    </script>
+</body>
+</html>

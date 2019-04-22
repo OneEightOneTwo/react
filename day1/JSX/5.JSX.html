@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../js/react.js"></script>
+    <!-- 提供全局的 React变量 -->
+    <script src="../js/react-dom.js"></script>
+    <!-- 提供全局的 ReactDOM变量 webpack  -->
+    <script src="../js/babel.js"></script>
+    <!-- 当前写的是jsx，而非js代码，babel帮你把jsx转化为js代码 -->
+    <script type="text/babel">
+            // jquery的写法
+            // $("#demo").html(template);
+            // jsx
+            let template = <div>
+                <p>你好</p>
+                <button name="text">你也好</button>
+            </div>
+            console.log(template)
+            ReactDOM.render(
+            // template
+            template,
+            // el
+            document.querySelector("#demo"),
+            // 回调可选项，你的页面被渲染之后触发的回调函数
+            ()=>{
+                console.log("render success")
+            })
+            // jsx其实就是描述一个html字符串的对象
+            // let jsxObj = {
+            //     type:"div",
+            //     props:{
+            //         children:"Hello World"
+            //     }
+            // }
+            // let jsxObj = {
+            //     type:"div",
+            //     props:{
+            //         children:[
+            //             {
+            //                 type:"p",
+            //                 props:{
+            //                     children:"你好"
+            //                 }
+            //             },
+            //             {
+            //                 type:"button",
+            //                 props:{
+            //                     children: "你也好"
+            //                     name: "text"
+            //                 }
+            //             },
+            //         ]
+            //     }
+            // }
+        </script>
+</body>
+
+</html>

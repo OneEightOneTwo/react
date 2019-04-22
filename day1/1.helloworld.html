@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="demo"></div>
+        <script src="../js/react.js"></script>
+        <!-- 提供全局的 React变量 -->
+        <script src="../js/react-dom.js"></script>
+        <!-- 提供全局的 ReactDOM变量 webpack  -->
+        <script src="../js/babel.js"></script>
+        <script type="text/babel">
+            // console.log(React);
+            // console.log(ReactDOM);
+            ReactDOM.render(
+            // template
+            <div>
+                Hello World
+            </div>,
+            // el
+            document.querySelector("#demo"),
+            // 回调可选项，你的页面被渲染之后触发的回调函数
+            ()=>{
+                console.log("render success")
+            })
+        </script>
+    </body>
+</html>
