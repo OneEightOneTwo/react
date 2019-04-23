@@ -218,6 +218,18 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 
 /***/ }),
 
+/***/ "./src/components/Child.jsx":
+/*!**********************************!*\
+  !*** ./src/components/Child.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// 工作中用class组件比较多，因为他比较符合面向对象的概念\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nclass Child extends React.Component {\n    constructor(props) {\n        super(props);\n    }\n    render() {\n        return React.createElement(\n            \"h1\",\n            null,\n            \"\\u5B50\\u7EC4\\u4EF6\",\n            this.props.skill\n        );\n    }\n    componentWillReceiveProps() {\n        // 该组件获取了新的props时候触发\n        console.log(\"-----------componentWillReceiveProps-------------\");\n    }\n    componentWillUnmount() {\n        // 监听自身是否被销毁了\n        console.log(\"-----------componentWillUnmount-------------\");\n    }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Child);\n\n//# sourceURL=webpack:///./src/components/Child.jsx?");
+
+/***/ }),
+
 /***/ "./src/components/Es6class.jsx":
 /*!*************************************!*\
   !*** ./src/components/Es6class.jsx ***!
@@ -226,7 +238,7 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// 工作中用class组件比较多，因为他比较符合面向对象的概念\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nclass Es6class extends React.Component {\n    render() {\n        return React.createElement(\n            'h1',\n            null,\n            '\\u7C7B\\u7EC4\\u4EF6, ',\n            this.props.name\n        );\n    }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Es6class);\n\n//# sourceURL=webpack:///./src/components/Es6class.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n// 工作中用class组件比较多，因为他比较符合面向对象的概念\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nclass Es6class extends React.Component {\n    render() {\n        return React.createElement(\n            'h1',\n            null,\n            '\\u7C7B\\u7EC4\\u4EF6,',\n            this.props.name,\n            this.props.skill\n        );\n    }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Es6class);\n\n//# sourceURL=webpack:///./src/components/Es6class.jsx?");
 
 /***/ }),
 
@@ -242,6 +254,30 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst React = __webpack_requi
 
 /***/ }),
 
+/***/ "./src/components/Lifecycle.jsx":
+/*!**************************************!*\
+  !*** ./src/components/Lifecycle.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Child_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Child.jsx */ \"./src/components/Child.jsx\");\n// 工作中用class组件比较多，因为他比较符合面向对象的概念\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\n\nclass Lifecycle extends React.Component {\n    // 构造器 初始化数据模型，没有虚拟DOM和真实DOM 相当于beforeCreate\n    constructor(props) {\n        console.log('-----------constructor-------------');\n        // super是配合extends使用的，是拿来继承React.Component一些属性和方法的，必须写的，用于继承\n        super(props);\n        // 相当于vue组件里面data  M数据模型\n        this.state = {\n            name: 'yao',\n            style: {\n                color: 'red'\n            },\n            // 控制组件的child增加或者删除\n            bool: true\n        };\n        console.log(this.render());\n    }\n    // react没有 编译前 编译后 beforeCreate created\n    // 挂载前 相当于 beforeMount\n    componentWillMount() {\n        // 更改数据state，修改状态\n        console.log('-----------componentWillMount-------------');\n        this.setState({\n            name: 'lemon'\n        });\n    }\n    componentDidMount() {\n        // 更改数据state，修改状态\n        // 虚拟DOM变成真实DOM\n        // 获取真实DOM在这个生命周期里面\n        console.log('-----------componentDidMount-------------');\n        this.refs.h1.style.color = \"red\";\n        console.log(this.refs.h1);\n        setTimeout(() => {\n            this.setState({\n                name: 'jinginging'\n            });\n        }, 1000);\n    }\n    // 监听输入框的值\n    getInputValue(event) {\n        // console.log(event.target.value)\n        // M->V\n        this.setState({\n            name: event.target.value\n        });\n    }\n    deleteChildCp() {\n        this.setState({\n            bool: !this.state.bool\n        });\n    }\n    render() {\n        // 新的虚拟DOM和旧的虚拟DOM进行差异更新\n        let vnode = React.createElement(\n            'div',\n            null,\n            React.createElement(\n                'h1',\n                { ref: 'h1' },\n                '\\u7236\\u7EC4\\u4EF6',\n                this.state.name\n            ),\n            (() => {\n                if (this.state.bool) {\n                    return React.createElement(_Child_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"], { skill: this.state.name });\n                } else {\n                    return;\n                }\n            })(),\n            React.createElement('input', { value: this.state.name, onChange: this.getInputValue.bind(this) }),\n            React.createElement(\n                'button',\n                { onClick: this.deleteChildCp.bind(this) },\n                '\\u5220\\u6389\\u5B50\\u7EC4\\u4EF6'\n            )\n        );\n        console.log('-----------render-------------');\n        console.log(vnode);\n        return vnode;\n    }\n    // 性能优化的重要一环\n    // shouldComponentUpdate(nextProps, nextState) {\n    //     console.log('-----------shouldComponentUpdate-------------')\n    //     console.log(this.state.name)\n    //     // render的节流，减少render的触发从而提升性能\n    //     // 返回true那就是触发render 如果返回false就不触发render\n    //     if (this.state.name.length > 7) {\n    //         return true\n    //     }else{\n    //         return false\n    //     }\n    // }\n    componentWillUpdate() {\n        // 虚拟DOM更新\n        console.log('-----------componentWillUpdate-------------');\n    }\n    componentDidUpdate() {\n        // 真实DOM更新\n        console.log('-----------componentDidUpdate-------------');\n    }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Lifecycle);\n\n//# sourceURL=webpack:///./src/components/Lifecycle.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/State.jsx":
+/*!**********************************!*\
+  !*** ./src/components/State.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// 工作中用class组件比较多，因为他比较符合面向对象的概念\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nclass State extends React.Component {\n    // 构造器\n    constructor(props) {\n        // super是配合extends使用的，是拿来继承React.Component一些属性和方法的，必须写的，用于继承\n        super(props);\n        // 相当于vue组件里面data  M数据模型\n        this.state = {\n            name: 'yao',\n            style: {\n                color: 'red'\n            }\n        };\n    }\n    testClick(num) {\n        console.log(this, num);\n        console.log(this.state.name);\n        // M -> V\n        // 只能通过setState来去改变state的值，从而更新视图\n        this.setState({\n            name: 'lemon'\n        });\n    }\n    testClickWithoutThis() {\n        console.log(this);\n    }\n    render() {\n        let {\n            name,\n            style\n        } = this.state;\n        return React.createElement(\n            'div',\n            null,\n            React.createElement(\n                'h1',\n                { style: style },\n                '\\u540D\\u5B57\\u4E3A',\n                name\n            ),\n            React.createElement(\n                'button',\n                { onClick: this.testClick.bind(this, 1) },\n                '\\u7ED1\\u5B9Athis'\n            ),\n            React.createElement(\n                'button',\n                { onClick: this.testClickWithoutThis },\n                '\\u6CA1\\u6709\\u7ED1\\u5B9Athis'\n            )\n        );\n    }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (State);\n\n//# sourceURL=webpack:///./src/components/State.jsx?");
+
+/***/ }),
+
 /***/ "./src/index.jsx":
 /*!***********************!*\
   !*** ./src/index.jsx ***!
@@ -250,7 +286,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst React = __webpack_requi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Function_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Function.jsx */ \"./src/components/Function.jsx\");\n/* harmony import */ var _components_Es6class_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Es6class.jsx */ \"./src/components/Es6class.jsx\");\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/_react-dom@16.8.6@react-dom/index.js\");\nconsole.log(React);\n// const vnode = React.createElement('div',null,'hello world')\n\nconst data = {\n    title: \"hello world\",\n    attr: \"abc\",\n    url: \"https://avatars2.githubusercontent.com/u/48898125?s=200&v=4\"\n};\nconst template = React.createElement(\n    'div',\n    null,\n    data.title,\n    (() => {\n        return '你好';\n    })(),\n    React.createElement(\n        'p',\n        { name: data.attr },\n        '\\u5C5E\\u6027\\u503C'\n    ),\n    React.createElement('img', { className: 'abc', src: data.url }),\n    React.createElement(_components_Function_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"], { name: 'World' }),\n    React.createElement(_components_Es6class_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], { name: 'Hello' })\n);\n\nconsole.log(template);\n// 构造函数组件 \n\n// 类组件 不需要注册，引入之后直接使用，组件的首字母必须大写\n\n\nReactDOM.render(template, document.querySelector(\"#demo\"));\n\n//# sourceURL=webpack:///./src/index.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Function_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Function.jsx */ \"./src/components/Function.jsx\");\n/* harmony import */ var _components_Es6class_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Es6class.jsx */ \"./src/components/Es6class.jsx\");\n/* harmony import */ var _components_State_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/State.jsx */ \"./src/components/State.jsx\");\n/* harmony import */ var _components_Lifecycle_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Lifecycle.jsx */ \"./src/components/Lifecycle.jsx\");\nconst React = __webpack_require__(/*! react */ \"./node_modules/_react@16.8.6@react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/_react-dom@16.8.6@react-dom/index.js\");\nconsole.log(React);\n// const vnode = React.createElement('div',null,'hello world')\n\nconst data = {\n    title: \"hello world\",\n    attr: \"abc\",\n    url: \"https://avatars2.githubusercontent.com/u/48898125?s=200&v=4\"\n};\nconst template = React.createElement(\n    'div',\n    null,\n    React.createElement(\n        'p',\n        null,\n        '1.JSX'\n    ),\n    data.title,\n    (() => {\n        return '你好';\n    })(),\n    React.createElement(\n        'p',\n        { name: data.attr },\n        '\\u5C5E\\u6027\\u503C'\n    ),\n    React.createElement('hr', null),\n    React.createElement(\n        'p',\n        null,\n        '2.\\u7EC4\\u4EF6'\n    ),\n    React.createElement(_components_Function_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"], { name: 'World' }),\n    React.createElement(_components_Es6class_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], { name: 'Hello', skill: 'ps' }),\n    React.createElement(_components_Es6class_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], { name: 'World', skill: 'js' }),\n    React.createElement('hr', null),\n    React.createElement(\n        'p',\n        null,\n        '3.\\u72B6\\u6001state'\n    ),\n    React.createElement(_components_State_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null),\n    React.createElement('hr', null),\n    React.createElement(\n        'p',\n        null,\n        '4.\\u751F\\u547D\\u5468\\u671F'\n    ),\n    React.createElement(_components_Lifecycle_jsx__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null),\n    React.createElement('hr', null)\n);\n\nconsole.log(template);\n// 构造函数组件 \n\n// 类组件 不需要注册，引入之后直接使用，组件的首字母必须大写\n\n\n\n\nReactDOM.render(template, document.querySelector(\"#demo\"));\n\n//# sourceURL=webpack:///./src/index.jsx?");
 
 /***/ }),
 

@@ -2,7 +2,10 @@
 const React = require('react')
 class Es6class extends React.Component {
     render() {
-        return <h1>类组件, {this.props.name}</h1>;
+        return <h1>类组件, 
+            {this.props.name}
+            {this.props.skill}
+        </h1>;
     }
 }
 
