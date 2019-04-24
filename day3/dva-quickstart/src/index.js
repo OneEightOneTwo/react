@@ -1,4 +1,6 @@
 import dva from 'dva';
+// 全局antd样式
+import 'antd-mobile/dist/antd-mobile.css';
 import './index.css';
 
 // 1. Initialize

@@ -2,7 +2,7 @@
 export default {
 
   namespace: 'example',
-
+  // 仓库
   state: {},
 
   subscriptions: {
