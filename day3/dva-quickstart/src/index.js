@@ -12,6 +12,7 @@ const app = dva();
 // 3. Model 配置人redux
 app.model(require('./models/example').default);
 app.model(require('./models/student').default);
+app.model(require('./models/tabbars').default);
 
 // 4. Router
 app.router(require('./router').default);

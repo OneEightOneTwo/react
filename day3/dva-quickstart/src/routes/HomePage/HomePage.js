@@ -4,6 +4,8 @@ import { connect } from 'dva';
 import Header from '../../components/Header/Header';
 import Search from '../../components/Search/Search';
 import Carousels from '../../components/Carousels/Carousels';
+import Footer from '../../components/Footer/Footer';
+import Buttonx from '../../components/Buttonx/Buttonx';
 
 function HomePage() {
   return (
@@ -11,6 +13,8 @@ function HomePage() {
       <Header />
       <Search type="3" />
       <Carousels />
+      <Buttonx />
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { connect } from 'dva'
 class StorePage extends Component {
     constructor(props) {
         super(props)
+        this.state = {}
     }
     editStudentState() {
         console.log(this.props)
