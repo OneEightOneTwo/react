@@ -1,5 +1,6 @@
 // createStore创建仓库
 import { createStore } from 'redux'
+
 const store = createStore(
     // 仓库
     (state = {
